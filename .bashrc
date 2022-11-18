@@ -1,24 +1,7 @@
 # Return if not interactive
 if [[ $- != *i* ]]; then return; fi
 
-
 # Utilities
-function watchFile() {
-    eval $2
-    last=`openssl sha256 -r $1 | awk '{print $1}'`
-    while true; do
-        sleep 0.5
-        current=`openssl sha256 -r $1 | awk '{print $1}'`
-        if [ "$last" != "$current" ]; then
-            eval ${@:2}
-            last=$current
-        fi
-    done
-}
-
-function publish() {
-    docker run --rm -v "$(pwd)":/files -p ${1:-'8080'}:80 comameito/static-server
-}
 
 function clearDocker() {
     docker rm -f $(docker ps -aq)
@@ -32,6 +15,7 @@ alias ll='ls -lG'
 alias lla='ls -laG'
 
 alias dc='docker-compose'
+alias kc='kubectl'
 
 export EDITOR=vim
 
@@ -40,24 +24,15 @@ export EDITOR=vim
 
 stty stop undef
 
-
 # Startup
 
-function help_keybind() {
-    break_line
-    echo 'C-p Previous commands'
-    echo 'C-r Search'
-    echo 'C-u Clear line'
-    echo 'C-a C-e Line start / end'
-    echo 'C-h Backspace'
-    echo 'C-m Enter'
-    break_line
-}
+sudo service docker start 1>/dev/null
+sudo service ssh start 1>/dev/null
 
-cd
-pwd
-ls
-function c() {
-    code $1 && exit
-}
-echo
+alias redis='redis-cli -h redis.comame.dev'
+
+export DENO_INSTALL="/home/comame/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
+
+export PATH=$PATH:$HOME/.local/bin
+. "$HOME/.cargo/env"
