@@ -59,5 +59,6 @@
   ],
   "explorer.sortOrder": "type",
   "terminal.integrated.scrollback": 1000000,
+  "terminal.integrated.localEchoLatencyThreshold": -1,
   "remote.autoForwardPorts": false
 }
