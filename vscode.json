@@ -1,4 +1,6 @@
 {
+  "window.zoomLevel": -1,
+
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
   "files.trimFinalNewlines": true,
@@ -55,10 +57,15 @@
     "javascript",
     "typescript",
     "javascriptreact",
-    "typescriptreact"
+    "typescriptreact",
+    "php"
   ],
   "explorer.sortOrder": "type",
   "terminal.integrated.scrollback": 1000000,
   "terminal.integrated.localEchoLatencyThreshold": -1,
-  "remote.autoForwardPorts": false
+  "remote.autoForwardPorts": false,
+  "update.showReleaseNotes": false,
+
+  "cSpell.enabled": true,
+  "cSpell.diagnosticLevel": "Hint"
 }
