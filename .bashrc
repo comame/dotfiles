@@ -24,7 +24,7 @@ if [ -e $HOME/.ssh-agent-setup ]; then
     eval $(cat $HOME/.ssh-agent-setup) 1>/dev/null
 fi
 
-ssh-addp() {
+__ssh-addp() {
     pkill -u $(whoami) ssh-agent
     ssh-agent > $HOME/.ssh-agent-setup
     eval $(cat $HOME/.ssh-agent-setup)
@@ -32,8 +32,7 @@ ssh-addp() {
 }
 
 setup-ssh() {
-    ssh-addp ~/.ssh/id_ed25519
-    ssh-add ~/.ssh/google_compute_engine
+    __ssh-addp
 }
 
 # Kubernetes
@@ -45,10 +44,19 @@ get-deploy-pods() {
 
 # git completion
 
-. ~/.local/lib/git-completion/git-completion.bash
+__setup_git-completion() {
+    if [ ! -f ~/.local/lib/git-completion/git-completion.bash ]; then
+        echo 'setup git-completion'
+        mkdir -p ~/.local/lib/git-completion
+        curl -o ~/.local/lib/git-completion/git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+    fi
+
+    . ~/.local/lib/git-completion/git-completion.bash
+}
+__setup_git-completion
 
 # gitの状態を表示する
-prompt-git() {
+__prompt-git() {
     if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
         return
     fi
@@ -57,4 +65,4 @@ prompt-git() {
     echo -n " [$branch]"
 }
 PROMPT_DEFAULT='${debian_chroot:+($debian_chroot)}\[\e[01;32m\]\u@\h\[\e[00m\]:\[\e[01;34m\]\w\[\e[00m\]'
-export PS1="$PROMPT_DEFAULT\[\e[01;36m\]\$(prompt-git)\[\e[00m\]\\n$ "
+export PS1="$PROMPT_DEFAULT\[\e[01;36m\]\$(__prompt-git)\[\e[00m\]\\n$ "
