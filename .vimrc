@@ -19,6 +19,7 @@ set imdisable
 set showcmd
 set wrap
 set nolinebreak
+set fileencodings=utf-8
 
 set hlsearch
 set showmatch
@@ -43,16 +44,18 @@ noremap <C-h> :wincmd<Space>h<Enter>
 noremap <C-l> :wincmd<Space>l<Enter>
 noremap <C-j> :wincmd<Space>j<Enter>
 noremap <C-k> :wincmd<Space>k<Enter>
-noremap <S-h> :bprev<Enter>
-noremap <S-l> :bnext<Enter>
-noremap <S-j> :tabnext<Enter>
-noremap <S-k> :tabprevious<Enter>
+noremap <S-k> :bprev<Enter>
+noremap <S-j> :bnext<Enter>
+noremap <S-l> :tabnext<Enter>
+noremap <S-h> :tabprevious<Enter>
 noremap <Esc><Esc> :noh<Enter>
-" よく使うアレ
-" C-u, C-d PageUp,Down
-" mark m[a-zA-Z], jump '[a-zA-Z]
-" C-o jump prev, C-i jump next
-" w word next, b word prev
+tnoremap <Esc><Esc> <C-w>N
+" よく使うショートカットをメモしておく
+" NORMAL: C-u, C-d PageUp,Down
+" NORMAL: mark m[a-zA-Z], jump '[a-zA-Z]
+" NORMAL: C-o jump prev, C-i jump next
+" NORMAL: w word next, b word prev
+" INSERT: C-t more indent, C-d less indent
 
 " 拡張子ごとの設定
 if has("autocmd")
