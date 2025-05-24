@@ -1,4 +1,5 @@
 {
+  "window.commandCenter": false,
   "window.zoomLevel": -1,
 
   "files.insertFinalNewline": true,
@@ -12,8 +13,12 @@
     "**/.factorypath": true
   },
 
+  "git.optimisticUpdate": false,
+  "git.terminalAuthentication": false,
+  "git.branchProtection": ["master", "main"],
+  "git.enableStatusBarSync": false,
   "workbench.startupEditor": "none",
-  "workbench.colorTheme": "Default Dark+",
+  "workbench.colorTheme": "GitHub Light",
   "workbench.tree.renderIndentGuides": "none",
   "workbench.statusBar.visible": true,
   "workbench.sideBar.location": "right",
@@ -44,7 +49,7 @@
   "editor.renderControlCharacters": false,
   "editor.unicodeHighlight.nonBasicASCII": false,
   "editor.fontFamily": "Cascadia Mono, Consolas, monospace",
-  "editor.fontWeight": "380",
+  "editor.fontWeight": "480",
   "editor.minimap.enabled": false,
   "editor.quickSuggestions": {
     "other": true,
@@ -64,8 +69,8 @@
   "terminal.integrated.scrollback": 1000000,
   "terminal.integrated.localEchoLatencyThreshold": -1,
   "remote.autoForwardPorts": false,
+  "outline.collapseItems": "alwaysCollapse",
   "update.showReleaseNotes": false,
-
   "cSpell.enabled": true,
   "cSpell.diagnosticLevel": "Hint"
 }

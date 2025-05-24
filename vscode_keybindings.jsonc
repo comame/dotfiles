@@ -1,0 +1,143 @@
+[
+  // Vim-like navigation
+  {
+    "key": "alt+j", // j
+    "command": "cursorDown",
+    "when": "textInputFocus"
+  },
+  {
+    "key": "alt+k", // k
+    "command": "cursorUp",
+    "when": "textInputFocus"
+  },
+  {
+    "key": "alt+h", // h
+    "command": "cursorLeft",
+    "when": "textInputFocus"
+  },
+  {
+    "key": "alt+l", // l
+    "command": "cursorRight",
+    "when": "textInputFocus"
+  },
+  {
+    "key": "ctrl+alt+u", // Ctrl+u
+    "command": "cursorPageUp",
+    "when": "textInputFocus"
+  },
+  {
+    "key": "ctrl+alt+d", // Ctrl+d
+    "command": "cursorPageDown",
+    "when": "textInputFocus"
+  },
+  {
+    "key": "alt+o", // o
+    "command": "editor.action.insertLineAfter",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "shift+alt+o", // O
+    "command": "editor.action.insertLineBefore",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "alt+w", // w
+    "command": "cursorWordEndRight",
+    "when": "textInputFocus && !accessibilityModeEnabled"
+  },
+  {
+    "key": "alt+b", // b
+    "command": "cursorWordLeft",
+    "when": "textInputFocus && !accessibilityModeEnabled"
+  },
+  {
+    "key": "alt+g alt+g", // gg
+    "command": "cursorTop",
+    "when": "textInputFocus"
+  },
+  {
+    "key": "shift+alt+g shift+alt+g", // GG
+    "command": "cursorBottom",
+    "when": "textInputFocus"
+  },
+  {
+    "key": "shift+alt+4", // $
+    "command": "cursorEnd",
+    "when": "textInputFocus"
+  },
+  {
+    "key": "shift+alt+6", // ^
+    "command": "cursorHome",
+    "when": "textInputFocus"
+  },
+  {
+    "key": "alt+;", // ;
+    "command": "workbench.action.gotoLine"
+  },
+  // Ctrl + Tab to next/previous tab
+  {
+    "key": "ctrl+tab",
+    "command": "workbench.action.nextEditorInGroup",
+    "when": "!terminalFocus"
+  },
+  {
+    "key": "ctrl+shift+tab",
+    "command": "workbench.action.previousEditorInGroup",
+    "when": "!terminalFocus"
+  },
+  {
+    "key": "ctrl+tab",
+    "command": "workbench.action.terminal.focusNext",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+shift+tab",
+    "command": "workbench.action.terminal.focusPrevious",
+    "when": "terminalFocus"
+  },
+  // Remove default keybinds
+  {
+    "key": "shift+alt+o",
+    "command": "-editor.action.organizeImports",
+    "when": "textInputFocus && !editorReadonly && supportedCodeAction =~ /(\\s|^)source\\.organizeImports\\b/"
+  },
+  {
+    "key": "alt+w",
+    "command": "-toggleFindWholeWord",
+    "when": "editorFocus"
+  },
+  {
+    "key": "ctrl+tab",
+    "command": "-workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup",
+    "when": "!activeEditorGroupEmpty"
+  },
+  {
+    "key": "ctrl+tab",
+    "command": "-workbench.action.quickOpenNavigateNextInEditorPicker",
+    "when": "inEditorsPicker && inQuickOpen"
+  },
+  {
+    "key": "ctrl+shift+tab",
+    "command": "-workbench.action.quickOpenLeastRecentlyUsedEditorInGroup",
+    "when": "!activeEditorGroupEmpty"
+  },
+  {
+    "key": "ctrl+shift+tab",
+    "command": "-workbench.action.quickOpenNavigatePreviousInEditorPicker",
+    "when": "inEditorsPicker && inQuickOpen"
+  },
+  {
+    "key": "ctrl+e",
+    "command": "-workbench.action.quickOpen"
+  },
+  {
+    "key": "alt+down",
+    "command": "-workbench.action.terminal.focusNextPane",
+    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+  },
+  {
+    "key": "alt+right",
+    "command": "-workbench.action.terminal.focusNextPane",
+    "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+  }
+]
