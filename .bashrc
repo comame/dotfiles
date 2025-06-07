@@ -12,6 +12,7 @@ alias ls='ls --color=auto'
 # Disable default Ctrl-S behavior
 stty stop undef
 
+# 諸々をロード
 if [ -d ~/github.com/comame/dotfiles ]; then
     for s in $(ls ~/github.com/comame/dotfiles/.bashrc.d);do
         source ~/github.com/comame/dotfiles/.bashrc.d/$s
