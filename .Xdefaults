@@ -1,9 +1,0 @@
-XTerm*utf8: 1
-XTerm*locale: true
-XTerm*faceName: monospace
-XTerm*faceSize: 11
-XTerm*cjkWidth: true
-XTerm*selectToClipboard: true
-XTerm*visualBell: true
-XTerm*scrollBar: true
-
