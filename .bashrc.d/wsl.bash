@@ -1,13 +1,24 @@
 #! /bin/bash
 
-# WSL を永続化する
+# WSL のインスタンスが終了しないようにする
+
+__setup-wsl-keepalive() {
+    read -p 'setup WSL keepalive? (y)' yn
+    if [ "$yn" != 'y' ]; then
+        echo 'abort.'
+        return
+    fi
+
+    # https://github.com/microsoft/WSL/issues/8854
+    sudo cp $(dirname $BASH_SOURCE)/../lib/wsl-keepalive.service /etc/systemd/system/wsl-keepalive.service
+    sudo systemctl enable wsl-keepalive.service
+    sudo systemctl start wsl-keepalive.service
+}
 
 if [ -f /etc/wsl.conf ]; then
-    tmux start-server
-
-    # tmux に wsl-persist セッションがなければ、デタッチした状態で新しく起動する
-    if ! tmux has-session -t wsl-persist 2>/dev/null; then
-        tmux new-session -s wsl-persist -d
-        echo '[wsl-persist] started'
+    if [ ! -e /etc/systemd/system/wsl-keepalive.service ]; then
+        __setup-wsl-keepalive
     fi
 fi
+
+unset __setup-wsl-keepalive
