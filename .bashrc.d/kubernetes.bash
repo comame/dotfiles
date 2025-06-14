@@ -47,3 +47,33 @@ deploy() {
 
     eval "kubectl rollout restart deploy/$DEPLOY_NAME -n $DEPLOY_NAMESPACE"
 }
+
+install-k9s() {
+    local DIR=~/.local/lib/k9s
+    local LOCAL_VERSION=$(k9s version 2>/dev/null | grep Version: | awk '{print $2}')
+
+    echo -n "[install-k9s] fetching... "
+    if [ ! -d $DIR ]; then
+        mkdir -p $DIR
+        git clone --filter=blob:none git@github.com:derailed/k9s.git $DIR
+    fi
+    git -C $DIR fetch --prune
+    echo "✓"
+
+    local REMOTE_VERSION=$(git -C $DIR describe --tags --abbrev=0)
+    echo "[install-k9s] remote: $REMOTE_VERSION, local: $LOCAL_VERSION"
+    read -p "[install-k9s] continue? [y/N]: "
+    if [ "$REPLY" != 'y' ]; then
+        echo '[install-k9s] abort'
+        return
+    fi
+
+    pushd $DIR
+    git reset --hard && git clean -dff
+    git checkout $REMOTE_VERSION
+    echo -n "[install-k9s] building... "
+    make build
+    echo "✓"
+    ln -s $DIR/execs/k9s ~/.local/bin/k9s
+    popd
+}
