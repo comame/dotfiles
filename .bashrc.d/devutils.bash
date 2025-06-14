@@ -10,7 +10,7 @@ readenv() {
 }
 
 # テスト用 MySQL サーバを立てる
-start_local_mysql() {
+mysql-local() {
     local DATADIR="$(pwd)/.testdb"
 
     if [ -e $DATADIR ]; then
