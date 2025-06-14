@@ -18,6 +18,8 @@ export LESS='-S -M -R'
 
 alias ls='ls --color=auto'
 
+export PATH=$HOME/.local/bin:$PATH
+
 # Ctrl-S を無効化
 stty stop undef
 
