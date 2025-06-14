@@ -1,0 +1,42 @@
+install-go() {
+    set -e
+    if [ $(uname) != 'Linux' ]; then
+        echo '[install-go] only supported on Linux'
+        return
+    fi
+    if [ $(arch) != 'x86_64' ]; then
+        echo '[install-go] only supported on x86_64'
+        return
+    fi
+
+    echo -n '[install-go] fetching versions... '
+    local versions=$(curl -sL https://golang.org/dl/?mode=json)
+    echo '✓'
+
+    local remote_version=$(echo "$versions" | jq -r '.[0].version')
+    local local_version=$(go version | awk '{print $3}')
+    echo "[install-go] remote: $remote_version, local: $local_version"
+
+    read -p '[install-go] continue? [y/N]: '
+    if [ "$REPLY" != 'y' ]; then
+        echo '[install-go] abort'
+        return
+    fi
+
+    echo -n  '[install-go] downloading... '
+
+    local tarball="/tmp/$remote_version.linux-amd64.tar.gz"
+    curl -sL https://go.dev/dl/$remote_version.linux-amd64.tar.gz -o $tarball
+    if [ $(stat -c %s $tarball) -lt 10000000 ]; then
+        # 10MB未満ならダウンロード失敗とみなす
+        echo ''
+        echo '[install-go] download failed'
+        return
+    fi
+    echo '✓'
+
+    echo '[install-go] install...'
+    sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf "/tmp/$remote_version.linux-amd64.tar.gz"
+    echo '[install-go] done'
+    set +e
+}
