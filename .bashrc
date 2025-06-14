@@ -1,4 +1,4 @@
-# Return if not interactive
+# インタラクティブシェルでなければ終わり
 if [[ $- != *i* ]]; then return; fi
 
 # skeltonをロード
@@ -6,10 +6,10 @@ if [ -e /etc/skel/.bashrc ]; then
     source /etc/skel/.bashrc
 fi
 
+# .bashrc.d を読む
 for s in $(ls $(dirname $BASH_SOURCE)/.bashrc.d); do
     source $(dirname $BASH_SOURCE)/.bashrc.d/$s
 done
-
 
 export EDITOR=vim
 export HISTCONTROL='ignoreboth:erasedups'
