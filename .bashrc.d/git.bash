@@ -19,7 +19,7 @@ __prompt-git() {
         return
     fi
 
-    branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+    local branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
     if [ $branch = 'HEAD' ]; then
         branch='detached HEAD'
     fi
