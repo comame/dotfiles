@@ -1,3 +1,5 @@
+# 読み込みの遅い xenv を遅延ロード
+
 # Node.js
 
 __load-nvm() {
