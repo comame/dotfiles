@@ -36,7 +36,10 @@ install-go() {
     echo '✓'
 
     echo '[install-go] install...'
-    sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf "/tmp/$remote_version.linux-amd64.tar.gz"
+    rm -rf ~/.local/go && tar -C ~/.local -xzf "/tmp/$remote_version.linux-amd64.tar.gz"
     echo '[install-go] done'
     set +e
 }
+
+export PATH=$PATH:$HOME/.local/go/bin
+export PATH=$PATH:$HOME/go/bin
