@@ -69,7 +69,6 @@ install-k9s() {
     fi
 
     pushd $DIR
-    git reset --hard && git clean -dff
     git checkout $REMOTE_VERSION
     echo -n "[install-k9s] building... "
     make build
