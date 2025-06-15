@@ -4,9 +4,14 @@ alias date-dot='date +%Y.%m.%d.%H.%M.%S'
 
 # 環境変数を取り込む
 readenv() {
-    set -a
-    source $1
-    set +a
+    local FILE=$1
+    while IFS= read -r line; do
+        if [[ "$line" =~ ^[a-zA-Z_][a-zA-Z0-9_]*= ]]; then
+            local VAR_NAME=$(echo "$line" | cut -d '=' -f 1)
+            local VAR_VALUE=$(echo "$line" | cut -d '=' -f 2-)
+            export "$VAR_NAME=$VAR_VALUE"
+        fi
+    done < "$FILE"
 }
 
 # テスト用 MySQL サーバを立てる
