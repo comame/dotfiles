@@ -67,6 +67,7 @@
   "explorer.sortOrder": "type",
   "terminal.integrated.scrollback": 1000000,
   "terminal.integrated.localEchoLatencyThreshold": -1,
+  "terminal.integrated.inheritEnv": false,
   "remote.autoForwardPorts": false,
   "outline.collapseItems": "alwaysCollapse",
   "update.showReleaseNotes": false,
