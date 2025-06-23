@@ -1,17 +1,25 @@
 #! /bin/bash
 
 __setup_git-completion() {
-    if [ ! -f ~/.local/lib/git-completion/git-completion.bash ]; then
+    if [[ $__DOTFILES_SHELL != 'bash' && $__DOTFILES_SHELL != 'zsh' ]]; then
+        return
+    fi
+
+    if [ ! -f ~/.local/lib/git-completion/git-completion.$__DOTFILES_SHELL ]; then
         echo -n '[git-completion] installing...'
         mkdir -p ~/.local/lib/git-completion
-        curl --silent -o ~/.local/lib/git-completion/git-completion.bash https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash
+        curl --silent -o ~/.local/lib/git-completion/git-completion.$__DOTFILES_SHELL https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.$__DOTFILES_SHELL
         echo ' ✓'
     fi
 
-    . ~/.local/lib/git-completion/git-completion.bash
+    if [ $__DOTFILES_SHELL = 'bash' ]; then
+        source ~/.local/lib/git-completion/git-completion.$__DOTFILES_SHELL
+    elif [ $__DOTFILES_SHELL = 'zsh' ]; then
+        zstyle ':completion:*:*git:*' script ~/.local/lib/git-completion/git-completion.zsh
+    fi
 }
 __setup_git-completion
-unset __setup_git-completion
+unset -f __setup_git-completion
 
 # gitの状態を表示する
 __prompt-git() {

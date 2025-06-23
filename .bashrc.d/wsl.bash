@@ -21,4 +21,4 @@ if [ -f /etc/wsl.conf ]; then
     fi
 fi
 
-unset __setup-wsl-keepalive
+unset -f __setup-wsl-keepalive
