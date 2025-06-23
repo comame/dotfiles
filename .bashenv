@@ -1,10 +1,4 @@
-# スクリプトからも実行される
-
-# このrepoの配置されているディレクトリ (bash, zsh 両対応)
 __DOTFILES_DIR="$(cd $(dirname ${BASH_SOURCE:-$0}); pwd)"
-
-export BASH_ENV=$__DOTFILES_DIR/.bashenv
-
 
 # .bashenv.d を読む
 for s in $(ls $__DOTFILES_DIR/.bashenv.d); do
