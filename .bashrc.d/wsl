@@ -3,7 +3,7 @@
 # WSL のインスタンスが終了しないようにする
 
 __setup-wsl-keepalive() {
-    read -p 'setup WSL keepalive? (y)' yn
+    __read_prompt 'setup WSL keepalive? (y)' yn
     if [ "$yn" != 'y' ]; then
         echo 'abort.'
         return

@@ -62,7 +62,7 @@ install-k9s() {
 
     local REMOTE_VERSION=$(git -C $DIR describe --tags --abbrev=0)
     echo "[install-k9s] remote: $REMOTE_VERSION, local: $LOCAL_VERSION"
-    read -p "[install-k9s] continue? [y/N]: "
+    __read_prompt "[install-k9s] continue? [y/N]: "
     if [ "$REPLY" != 'y' ]; then
         echo '[install-k9s] abort'
         return
@@ -73,6 +73,6 @@ install-k9s() {
     echo -n "[install-k9s] building... "
     make build
     echo "✓"
-    ln -s $DIR/execs/k9s ~/.local/bin/k9s
+    ln -f -s $DIR/execs/k9s ~/.local/bin/k9s
     popd
 }
