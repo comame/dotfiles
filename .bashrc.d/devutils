@@ -1,5 +1,3 @@
-#! /bin/bash
-
 alias date-dot='date +%Y.%m.%d.%H.%M.%S'
 
 # 環境変数を取り込む

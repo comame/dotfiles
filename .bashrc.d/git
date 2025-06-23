@@ -1,5 +1,3 @@
-#! /bin/bash
-
 __setup_git-completion() {
     if [[ $__DOTFILES_SHELL != 'bash' && $__DOTFILES_SHELL != 'zsh' ]]; then
         return

@@ -2,12 +2,27 @@
 
 ## セットアップ
 
-### bash
+### シェル
+
+#### Bash
 
 ```
 # ~/.bashrc
 SSH_AGENT_AUTOLOAD=1
-source ~/github.com/comame/dotfiles
+source ~/github.com/comame/dotfiles/.bashrc
+```
+
+#### zsh
+
+```
+# ~/.zshrc
+SSH_AGENT_AUTOLOAD=1
+source ~/github.com/comame/dotfiles/.bashrc
+```
+
+```
+# ~/.zshenv
+source ~/github.com/comame/dotfiles/.bashenv
 ```
 
 ### vim

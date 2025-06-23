@@ -1,5 +1,3 @@
-#! /bin/bash
-
 load-ssh-agent() {
     if [ "$SSH_AGENT_AUTOLOAD" != 1 ]; then
         return
