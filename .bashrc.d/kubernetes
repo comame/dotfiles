@@ -53,7 +53,7 @@ install-k9s() {
     git -C $DIR fetch --prune
     echo "✓"
 
-    local REMOTE_VERSION=$(git -C $DIR describe --tags --abbrev=0)
+    local REMOTE_VERSION=$(git -C $DIR describe --tags $(git -C $DIR rev-list --tags --max-count=1))
     echo "[install-k9s] remote: $REMOTE_VERSION, local: $LOCAL_VERSION"
     __read_prompt "[install-k9s] continue? [y/N]: "
     if [ "$REPLY" != 'y' ]; then
