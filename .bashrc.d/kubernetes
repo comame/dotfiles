@@ -34,9 +34,9 @@ deploy() {
     fi
 
     eval "docker build -t $DEPLOY_DOCKER_REGISTRY/$DEPLOY_NAME:$DATE ."
-    eval "docker tag $DEPLOY_DOCKER_REGISTRY/$DEPLOY_NAME:$DATE $DEPLOY_DOCKER_REGISTRY/$DEPLOY_NAME:latest"
+    eval "docker tag $DEPLOY_DOCKER_REGISTRY/$DEPLOY_NAME:$DATE $DEPLOY_DOCKER_REGISTRY/$DEPLOY_NAME"":latest"
     eval "docker push $DEPLOY_DOCKER_REGISTRY/$DEPLOY_NAME:$DATE"
-    eval "docker push $DEPLOY_DOCKER_REGISTRY/$DEPLOY_NAME:latest"
+    eval "docker push $DEPLOY_DOCKER_REGISTRY/$DEPLOY_NAME"":latest"
 
     eval "kubectl rollout restart deploy/$DEPLOY_NAME -n $DEPLOY_NAMESPACE"
 }
