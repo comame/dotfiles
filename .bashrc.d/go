@@ -1,13 +1,20 @@
 install-go() {
     set -e
-    if [ $(uname) != 'Linux' ]; then
-        echo '[install-go] only supported on Linux'
-        return
-    fi
-    if [ $(arch) != 'x86_64' ]; then
-        echo '[install-go] only supported on x86_64'
-        return
-    fi
+
+    case "$(uname)" in
+        Linux) local os='linux' ;;
+        Darwin) local os='darwin' ;;
+    esac
+    case "$(arch)" in
+        x86_64) local arch='amd64' ;;
+        arm64) local arch='arm64' ;;
+    esac
+
+    case "$os-$arch" in
+        linux-amd64) ;;
+        darwin-arm64) ;;
+        *) echo "[install-go] unsupported platform: $os-$arch"; return ;;
+    esac
 
     echo -n '[install-go] fetching versions... '
     local versions=$(curl -sL 'https://golang.org/dl/?mode=json')
@@ -25,9 +32,15 @@ install-go() {
 
     echo -n  '[install-go] downloading... '
 
-    local tarball="/tmp/$remote_version.linux-amd64.tar.gz"
-    curl -sL https://go.dev/dl/$remote_version.linux-amd64.tar.gz -o $tarball
-    if [ $(stat -c %s $tarball) -lt 10000000 ]; then
+    local tarball="/tmp/$remote_version.$os-$arch.tar.gz"
+    curl -sL https://go.dev/dl/$remote_version.$os-$arch.tar.gz -o $tarball
+
+    if [ "$os" = 'darwin' ]; then
+        local tarball_size=$(stat -f %z $tarball)
+    else
+        local tarball_size=$(stat -c %s $tarball)
+    fi
+    if [ $tarball_size -lt 10000000 ]; then
         # 10MB未満ならダウンロード失敗とみなす
         echo ''
         echo '[install-go] download failed'
@@ -36,7 +49,7 @@ install-go() {
     echo '✓'
 
     echo '[install-go] install...'
-    rm -rf ~/.local/go && tar -C ~/.local -xzf "/tmp/$remote_version.linux-amd64.tar.gz"
+    rm -rf ~/.local/go && tar -C ~/.local -xzf "/tmp/$remote_version.$os-$arch.tar.gz"
     echo '[install-go] done'
     set +e
 }

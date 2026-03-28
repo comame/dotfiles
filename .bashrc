@@ -10,7 +10,12 @@
 # (それ以外) .zshenv => .bashenv
 
 __DOTFILES_DIR="$(cd $(dirname ${BASH_SOURCE:-$0}); pwd)"
-__DOTFILES_SHELL=$(basename $(readlink "/proc/$$/exe"))
+
+if [ "$(uname)" = "Darwin" ]; then
+    __DOTFILES_SHELL='zsh'
+else
+    __DOTFILES_SHELL=$(basename $(readlink "/proc/$$/exe"))
+fi
 
 # read -p が bash と zsh で互換性がない
 function __read_prompt() {
