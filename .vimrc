@@ -37,8 +37,6 @@ set statusline+=%=
 set statusline+=%l/%L\ (%p%%)\ \ %{&fileencoding}\ \ %{ff_map[&ff]}\ \ %{&filetype}
 set laststatus=2
 
-noremap ; :
-noremap : ;
 noremap <S-w> <C-w>
 noremap <C-h> :wincmd<Space>h<Enter>
 noremap <C-l> :wincmd<Space>l<Enter>
