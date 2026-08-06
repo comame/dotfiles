@@ -2,7 +2,7 @@
 
 # Node.js
 
-if [ -e ~/.nvm/nvm.sh ]; then
+if [ -n "$NVM_DIR" ]; then
     __load-nvm() {
         unset -f __load-nvm
         unset -f nvm
@@ -10,7 +10,11 @@ if [ -e ~/.nvm/nvm.sh ]; then
         unset -f npx
         unset -f node
 
-        . "$HOME/.nvm/nvm.sh"
+        if [ -s "$NVM_DIR/nvm.sh" ]; then
+            . "$NVM_DIR/nvm.sh"
+        elif [ -s "/opt/homebrew/opt/nvm/nvm.sh" ]; then
+            . "/opt/homebrew/opt/nvm/nvm.sh"
+        fi
     }
 
     nvm() { __load-nvm; nvm "$@"; }
